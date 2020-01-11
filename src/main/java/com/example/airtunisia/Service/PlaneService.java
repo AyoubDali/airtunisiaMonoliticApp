@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Service/PlaneService")
@@ -41,6 +40,7 @@ public class PlaneService {
 
         Plane plane = planeRepository.findById(id);
         plane.setBrand(planeInfo.getBrand());
+        planeRepository.save(plane);
         return plane ;
     }
 

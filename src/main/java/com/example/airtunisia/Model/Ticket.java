@@ -38,6 +38,12 @@ public class Ticket {
     @Column( name = "lastName")
     private String lastName;
 
-    @Column( name = "CIN")
-    private long CIN;
+    @Column( name = "cin")
+    private long cin;
+
+    @ManyToOne
+    @JoinColumn(name = "flight_id", nullable = false)
+    Flight flight;
+
+
 }
