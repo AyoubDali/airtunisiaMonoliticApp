@@ -41,6 +41,7 @@ public class PlaneService {
 
         Plane plane = planeRepository.findById(id);
         plane.setBrand(planeInfo.getBrand());
+        planeRepository.save(plane);
         return plane ;
     }
 

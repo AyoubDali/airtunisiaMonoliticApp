@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Service/TicketService")
@@ -27,4 +27,16 @@ public class TicketService {
         return newTicket;
     }
 
+    @DeleteMapping(value = "/deleteTicket/{id}")
+    public String deleteTicket(@PathVariable int id) {
+        ticketRepository.deleteById(id);
+        return "OK!";
+    }
+    @PutMapping(value = "/editTicket/{id}")
+    public Ticket editTicket(@RequestBody Ticket ticketInfo, @PathVariable int id) {
+        Ticket ticket = ticketRepository.findById(id);
+        ticket.setPrice(ticketInfo.getPrice());
+        ticketRepository.save(ticket);
+        return ticket;
+    }
 }
