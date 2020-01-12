@@ -1,5 +1,8 @@
 package com.example.airtunisia.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +32,16 @@ public class Flight {
     private String arriveTime;
 
     //private long freePlaces;
-    @OneToMany(mappedBy = "flight")
+    @JsonBackReference
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
     private Set<Ticket> tickets = new HashSet<>();
 
+    //@JsonBackReference
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plane_id", nullable = true)
+    private Plane plane;
+
+
 }
+

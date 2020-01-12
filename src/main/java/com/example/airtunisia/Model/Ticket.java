@@ -1,6 +1,9 @@
 package com.example.airtunisia.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,24 +29,19 @@ public class Ticket {
     @Column( name = "date")
     private String date;
 
-    @Column( name = "departure")
-    private String departure;
+    @Column( name = "passengerFirstName")
+    private String passengerFirstName;
 
-    @Column( name = "destination")
-    private String destination;
-
-    @Column( name = "firstName")
-    private String firstName;
-
-    @Column( name = "lastName")
-    private String lastName;
+    @Column( name = "passengerLastName")
+    private String passengerLastName;
 
     @Column( name = "cin")
     private long cin;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "flight_id", nullable = false)
-    Flight flight;
+    @JoinColumn(name = "flight_id", nullable = true)
+    private Flight flight;
 
 
 }
